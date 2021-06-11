@@ -12,6 +12,7 @@ LABEL git.build.time=${GIT_BUILD_TIME}
 LABEL git.run.number=${GITHUB_RUN_NUMBER}
 LABEL git.run.id=${TRAVIS_BUILD_WEB_URL}
 
+RUN apk update && apk --no-cache add curl
 
 RUN set -eux; \
     	\
