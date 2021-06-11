@@ -2,7 +2,7 @@
 
 ###############################
 #  CHANGE THIS ON EVERY REPO  #
-DOCKER_IMAGE=compute-api
+DOCKER_IMAGE=$(basename `git rev-parse --show-toplevel`)
 ###############################
 
 # default env vars in GH actions
