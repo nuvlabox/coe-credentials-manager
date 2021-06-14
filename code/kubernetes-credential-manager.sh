@@ -14,7 +14,7 @@ then
   exit 1
 fi
 
-generate() {
+generate-credentials() {
   echo "INFO: generating new user '${USER}' and API access certificates"
 
   openssl genrsa -out key.pem 4096
@@ -90,7 +90,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 EOF
 
-  kubectly apply -f nuvla-cluster-role-binding.yaml
+  kubectl apply -f nuvla-cluster-role-binding.yaml
 
   echo "INFO: success"
 
@@ -103,7 +103,7 @@ EOF
 
 if [[ ! -f ${SHARED}/${SYNC_FILE} ]]
 then
-  generate
+  generate-credentials
 else
   echo "INFO: re-using existing certificates from ${SHARED}: \n$(ls ${SHARED}/*pem)"
 
@@ -114,6 +114,6 @@ else
   then
     echo "ERR: existing certificates are not valid. Generating new ones"
     rm ${SHARED}/${SYNC_FILE}
-    generate
+    generate-credentials
   fi
 fi
