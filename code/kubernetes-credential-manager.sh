@@ -1,6 +1,6 @@
 #!/bin/sh -xe
 
-kubectl proxy
+kubectl proxy &
 
 SHARED="/srv/nuvlabox/shared"
 SYNC_FILE=".tls"
