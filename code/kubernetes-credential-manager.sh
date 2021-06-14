@@ -14,7 +14,7 @@ then
   exit 1
 fi
 
-generate-credentials() {
+generate_credentials() {
   echo "INFO: generating new user '${USER}' and API access certificates"
 
   openssl genrsa -out key.pem 4096
@@ -103,7 +103,7 @@ EOF
 
 if [[ ! -f ${SHARED}/${SYNC_FILE} ]]
 then
-  generate-credentials
+  generate_credentials
 else
   echo "INFO: re-using existing certificates from ${SHARED}: \n$(ls ${SHARED}/*pem)"
 
@@ -114,6 +114,6 @@ else
   then
     echo "ERR: existing certificates are not valid. Generating new ones"
     rm ${SHARED}/${SYNC_FILE}
-    generate-credentials
+    generate_credentials
   fi
 fi
