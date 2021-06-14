@@ -34,4 +34,8 @@ EXPOSE 8001
 
 WORKDIR /opt/nuvlabox
 
+ADD code/ LICENSE ./
+
+ONBUILD RUN ./license.sh
+
 ENTRYPOINT ["./kubernetes-credential-manager.sh"]
