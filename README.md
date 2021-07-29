@@ -1,12 +1,14 @@
 # NuvlaBox Kubernetes Credential Manager
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/nuvlabox/kubernetes-credential-manager/graphs/commit-activity)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/nuvlabox/kubernetes-credentials-manager/graphs/commit-activity)
+
+[![GitHub issues](https://img.shields.io/github/issues/nuvlabox/kubernetes-credentials-manager?style=for-the-badge&logo=github&logoColor=white)](https://GitHub.com/nuvlabox/kubernetes-credentials-manager/issues/)
+[![Docker pulls](https://img.shields.io/docker/pulls/nuvlabox/kubernetes-credentials-manager?style=for-the-badge&logo=Docker&logoColor=white)](https://cloud.docker.com/u/nuvlabox/repository/docker/nuvlabox/kubernetes-credentials-manager)
+[![Docker image size](https://img.shields.io/microbadger/image-size/nuvlabox/kubernetes-credentials-manager?style=for-the-badge&logo=docker&logoColor=white)](https://cloud.docker.com/u/nuvlabox/repository/docker/nuvlabox/kubernetes-credentials-manager)
 
 
-[![CI](https://img.shields.io/travis/com/nuvlabox/kubernetes-credential-manager?style=for-the-badge&logo=travis-ci&logoColor=white)](https://travis-ci.com/nuvlabox/kubernetes-credential-manager)
-[![GitHub issues](https://img.shields.io/github/issues/nuvlabox/kubernetes-credential-manager?style=for-the-badge&logo=github&logoColor=white)](https://GitHub.com/nuvlabox/kubernetes-credential-manager/issues/)
-[![Docker pulls](https://img.shields.io/docker/pulls/nuvlabox/kubernetes-credential-manager?style=for-the-badge&logo=Docker&logoColor=white)](https://cloud.docker.com/u/nuvlabox/repository/docker/nuvlabox/kubernetes-credential-manager)
-[![Docker image size](https://img.shields.io/microbadger/image-size/nuvlabox/kubernetes-credential-manager?style=for-the-badge&logo=docker&logoColor=white)](https://cloud.docker.com/u/nuvlabox/repository/docker/nuvlabox/kubernetes-credential-manager)
+![CI Build](https://github.com/nuvlabox/kubernetes-credentials-manager/actions/workflows/main.yml/badge.svg)
+![CI Release](https://github.com/nuvlabox/kubernetes-credentials-manager/actions/workflows/release.yml/badge.svg)
 
 
 **This repository contains the source code for the NuvlaBox Kubernetes Credential Manager - the microservice which is responsible for generating and approving the credentials that are used by Nuvla to connect to the CaaS infrastructure.**
