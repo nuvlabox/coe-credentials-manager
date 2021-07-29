@@ -4,7 +4,7 @@
 
 [![GitHub issues](https://img.shields.io/github/issues/nuvlabox/kubernetes-credentials-manager?style=for-the-badge&logo=github&logoColor=white)](https://GitHub.com/nuvlabox/kubernetes-credentials-manager/issues/)
 [![Docker pulls](https://img.shields.io/docker/pulls/nuvlabox/kubernetes-credentials-manager?style=for-the-badge&logo=Docker&logoColor=white)](https://cloud.docker.com/u/nuvlabox/repository/docker/nuvlabox/kubernetes-credentials-manager)
-[![Docker image size](https://img.shields.io/microbadger/image-size/nuvlabox/kubernetes-credentials-manager?style=for-the-badge&logo=docker&logoColor=white)](https://cloud.docker.com/u/nuvlabox/repository/docker/nuvlabox/kubernetes-credentials-manager)
+[![Docker image size](https://img.shields.io/docker/image-size/nuvladev/kubernetes-credentials-manager/main?logo=docker&logoColor=white&style=for-the-badge)](https://cloud.docker.com/u/nuvlabox/repository/docker/nuvladev/kubernetes-credentials-manager)
 
 
 ![CI Build](https://github.com/nuvlabox/kubernetes-credentials-manager/actions/workflows/main.yml/badge.svg)
