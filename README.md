@@ -38,4 +38,4 @@ This is an open-source project, so all community contributions are more than wel
  
 ## Copyright
 
-Copyright &copy; 2021, SixSq Sàrl
+Copyright &copy; 2021, SixSq SA
