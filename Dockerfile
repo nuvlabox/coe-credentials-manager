@@ -16,8 +16,8 @@ LABEL org.opencontainers.image.authors="support@sixsq.com"
 LABEL org.opencontainers.image.created=${GIT_BUILD_TIME}
 LABEL org.opencontainers.image.url=${PROJECT_URL}
 LABEL org.opencontainers.image.vendor="SixSq SA"
-LABEL org.opencontainers.image.title="NuvlaBox Kubernetes Credentials Manager"
-LABEL org.opencontainers.image.description="Manages the Kubernetes credentials necessary for managing the NuvlaBox from Nuvla"
+LABEL org.opencontainers.image.title="NuvlaEdge Kubernetes Credentials Manager"
+LABEL org.opencontainers.image.description="Manages the Kubernetes credentials necessary for managing the NuvlaEdge from Nuvla"
 
 RUN apk update && apk --no-cache add curl openssl
 
@@ -39,7 +39,7 @@ RUN set -eux; \
 
 EXPOSE 8001
 
-WORKDIR /opt/nuvlabox
+WORKDIR /opt/nuvlaedge
 
 ADD code/ LICENSE ./
 

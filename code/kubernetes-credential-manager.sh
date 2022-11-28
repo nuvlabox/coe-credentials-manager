@@ -2,10 +2,10 @@
 
 kubectl proxy &
 
-SHARED="/srv/nuvlabox/shared"
+SHARED="/srv/nuvlaedge/shared"
 SYNC_FILE=".tls"
 CA="/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
-export CSR_NAME="nuvlabox-csr"
+export CSR_NAME="nuvlaedge-csr"
 USER="nuvla"
 
 if [[ ! -f ${CA} ]]
@@ -19,7 +19,7 @@ generate_credentials() {
 
   openssl genrsa -out key.pem 4096
 
-  cat>nuvlabox.cnf <<EOF
+  cat>nuvlaedge.cnf <<EOF
 [ req ]
 default_bits = 2048
 prompt = no
@@ -35,18 +35,18 @@ keyUsage=keyEncipherment,dataEncipherment
 extendedKeyUsage=serverAuth,clientAuth
 EOF
 
-  openssl req -config ./nuvlabox.cnf -new -key key.pem -nodes -out nuvlabox.csr
+  openssl req -config ./nuvlaedge.cnf -new -key key.pem -nodes -out nuvlaedge.csr
 
-  BASE64_CSR=$(cat ./nuvlabox.csr | base64 | tr -d '\n')
+  BASE64_CSR=$(cat ./nuvlaedge.csr | base64 | tr -d '\n')
 
-  cat>nuvlabox-csr.yaml <<EOF
+  cat>nuvlaedge-csr.yaml <<EOF
 apiVersion: certificates.k8s.io/v1
 kind: CertificateSigningRequest
 metadata:
   name: ${CSR_NAME}
   labels:
-    nuvlabox.component: "True"
-    nuvlabox.deployment: "production"
+    nuvlaedge.component: "True"
+    nuvlaedge.deployment: "production"
 spec:
   groups:
   - system:authenticated
@@ -58,7 +58,7 @@ spec:
   - client auth
 EOF
 
-  kubectl apply -f nuvlabox-csr.yaml
+  kubectl apply -f nuvlaedge-csr.yaml
 
   kubectl certificate approve ${CSR_NAME}
 
@@ -78,8 +78,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
  name: ${USER}-cluster-role-binding
  labels:
-    nuvlabox.component: "True"
-    nuvlabox.deployment: "production"
+    nuvlaedge.component: "True"
+    nuvlaedge.deployment: "production"
 subjects:
 - kind: User
   name: ${USER}
