@@ -1,11 +1,11 @@
 #!/bin/sh -xe
 
-WAIT_APPROVED=${WAIT_APPROVED:-600}
+WAIT_APPROVED_SEC=${WAIT_APPROVED_SEC:-600}
+CSR_NAME=${CSR_NAME:-nuvlaedge-csr}
 
 SHARED="/srv/nuvlaedge/shared"
 SYNC_FILE=".tls"
 CA="/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
-export CSR_NAME="nuvlaedge-csr"
 USER="nuvla"
 
 if [ ! -f ${CA} ]
@@ -84,7 +84,7 @@ EOF
 
   kubectl get csr
 
-  timeout -t ${WAIT_APPROVED} sh -c 'while [[ -z "$CERT" ]]
+  timeout -t ${WAIT_APPROVED_SEC} sh -c 'while [[ -z "$CERT" ]]
 do
 CERT=`kubectl get csr ${CSR_NAME} -o jsonpath="{.status.certificate}" | base64 -d`
 done'
