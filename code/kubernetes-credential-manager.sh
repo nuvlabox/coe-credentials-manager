@@ -8,14 +8,6 @@ SYNC_FILE=".tls"
 CA="/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
 USER="nuvla"
 
-if [ ! -f ${CA} ]
-then
-  echo "ERR: cannot find CA certificate at ${CA}. Make sure a proper Service Account is being used"
-  exit 1
-else
-  cp ${CA} ca.pem
-fi
-
 is_cred_valid() {
   CRED_PATH=${1}
 
@@ -37,7 +29,7 @@ is_cred_valid() {
 }
 
 generate_credentials() {
-  echo "INFO: generating new user '${USER}' and API access certificates"
+  echo "INFO: Generating new user '${USER}' and API access certificates."
 
   openssl genrsa -out key.pem 4096
 
@@ -80,6 +72,8 @@ spec:
   - client auth
 EOF
 
+  kubectl delete -f nuvlaedge-csr.yaml || true
+
   kubectl apply -f nuvlaedge-csr.yaml
 
   kubectl get csr
@@ -90,19 +84,19 @@ CERT=`kubectl get csr ${CSR_NAME} -o jsonpath="{.status.certificate}" | base64 -
 done'
   kubectl get csr ${CSR_NAME} -o jsonpath="{.status.certificate}" | base64 -d > cert.pem
 
-  echo "INFO: Validating credentials"
+  echo "INFO: Validating credentials."
 
   if is_cred_valid .
   then
     cp ca.pem cert.pem key.pem ${SHARED}
-    touch ${SHARED}/${SYNC_FILE}
-    echo "INFO: success"
+    echo date > ${SHARED}/${SYNC_FILE}
+    echo "INFO: Success. Generated new valid credentials: \n$(ls -al ${SHARED}/*.pem ${SHARED}/${SYNC_FILE})"
   else
-    echo "ERROR: generated credentials are not valid"
+    echo "ERROR: Generated credentials are not valid."
     return 1
   fi
 
-  echo "INFO: assigning cluster-admin privileges to user '${USER}'"
+  echo "INFO: Assigning cluster-admin privileges to user '${USER}'."
 
   cat>nuvla-cluster-role-binding.yaml <<EOF
 kind: ClusterRoleBinding
@@ -127,15 +121,25 @@ EOF
 
 ############
 
+if [ ! -f ${CA} ]
+then
+  echo "ERROR: Cannot find CA certificate at ${CA}. Make sure a proper Service Account is being used for running the container.."
+  exit 1
+else
+  cp ${CA} ca.pem
+fi
+
 if [ ! -f ${SHARED}/${SYNC_FILE} ]
 then
+  echo "INFO: Sync file ${SHARED}/${SYNC_FILE} is not available. Generating new credentials."
   generate_credentials
 else
-  if is_crec_valid ${SHARED}
-    echo "INFO: Reusing existing certificates from ${SHARED}: \n$(ls ${SHARED}/*pem)"
+  if is_cred_valid ${SHARED}
   then
-    echo "ERR: Existing certificates are not valid. Generating new ones."
-    rm ${SHARED}/${SYNC_FILE}
+    echo "INFO: Reusing existing certificates from ${SHARED}: \n$(ls -l ${SHARED}/*.pem)"
+  else
+    echo "ERROR: Existing certificates are not valid. Generating new ones."
+    rm -f ${SHARED}/${SYNC_FILE} ${SHARED}/{ca,cert,key}.pem
     generate_credentials
   fi
 fi
