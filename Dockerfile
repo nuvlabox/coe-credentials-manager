@@ -37,8 +37,6 @@ RUN set -eux; \
     	mv ./kubectl /usr/local/bin/kubectl && \
         which kubectl
 
-EXPOSE 8001
-
 WORKDIR /opt/nuvlaedge
 
 ADD code/ LICENSE ./
