@@ -1,4 +1,8 @@
 # Changelog
+## [1.1.1] - 2023-06-25
+### Added
+### Changed
+ - fix build for arm64 which was wrongly downloading amd64 binary of kubectl
 
 ## Unreleased
 
