@@ -28,7 +28,7 @@ RUN set -eux; \
     		x86_64) kubectlArch='amd64' ;; \
     		armv7) kubectlArch='arm' ;; \
     		armhf) kubectlArch='arm' ;; \
-        aarch64) kubectlArch='amd64' ;; \
+    		aarch64) kubectlArch='arm64' ;; \
     		*) echo >&2 "error: unsupported architecture ($apkArch) for kubectl"; exit 1 ;;\
     	esac; \
     	\
